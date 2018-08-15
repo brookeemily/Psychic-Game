@@ -1,61 +1,85 @@
-//Create an array that holds every letter that the computer can choose
-var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+// Define variables
 
-//Declare variables (wins, losses, guesses left, letters guessed & computer's choice)
+// letters that computer can choose
+var computerChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+// scoreboard
 var wins = 0;
-var losses = 0;
+var loss = 0;
+
+// guesses left & letters guessed 
 var guessesLeft = 9;
 var lettersGuessed = [];
-var computerGuess = [];
+var computerChose = [];
 
-
-//Computer chooses a letter
 window.onload = function() {
-	var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-	computerGuess.push(compGuess);
-	console.log(computerGuess[0]);
+      // This randomly chooses a letter from the computerChoice array - this is the computer's letter
+      var computerLetter = computerChoice[Math.floor(Math.random()*computerChoice.length)];
+      computerChose.push(computerLetter);
+      console.log(computerChose[0]);
 }
+  
+// User input
+ // This function is run whenever the user presses a key.
+ document.onkeyup = function(event) {
+
+    // Determines which key was pressed.
+    var userGuess = event.key;
+    console.log(userGuess);
 
 
-// GAME
-document.onkeyup = function(event) {
-	var playerGuess = event.key;
-	lettersGuessed.push(playerGuess);
-    console.log(computerGuess[0]);
+
+    var charCode = typeof event.which == "letter" ? event.which : event.keyCode;
+
+    if (charCode) {
+        lettersGuessed.push(String.fromCharCode(charCode));
+
+
+
+
+if((userGuess === computerChose[0]) && (guessesLeft > 0)) {
+    wins++;
+    console.log("you're a winner baby");
+    guessesLeft = 9;
+    lettersGuessed = [];
+    computerChose = [];
+    var computerLetter = computerChoice[Math.floor(Math.random()*computerChoice.length)];
+    computerChose.push(computerLetter);
+    console.log(computerChose[0]);
+ }
+
+if((userGuess !== computerChose[0]) && (guessesLeft > 0)) {
+    // lettersGuessed.push(item1, item2, item3, item4, item5, item6, item7, item8, item9);
+    guessesLeft--;
+    console.log("sry");
+    }
+
+    if((userGuess !== computerChose[0]) && (guessesLeft <= 0)) {
+        // lettersGuessed.push(item1, item2, item3, item4, item5, item6, item7, item8, item9);
+        guessesLeft = 9;
+        loss++;
+        lettersGuessed = [];
+        console.log("You took the L");
+        computerChose = [];
+        var computerLetter = computerChoice[Math.floor(Math.random()*computerChoice.length)];        
+        computerChose.push(computerLetter);
+        console.log(computerChose[0]);
+
+        }
+
     
-//If play guesses correctly and they have guesses left, they get a point
-if ((playerGuess === computerGuess[0]) && (guessesLeft > 0)) {
-	wins++;
-	guessesLeft = 9;
-	lettersGuessed.length = 0;
-	computerGuess.length = 0;
-	var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-	computerGuess.push(compGuess);
-	console.log(computerGuess[0]);
-}
-// if the player's guess does not match the computer, but the player has guesses left, they will lose a guess and get to continue
-else if ((playerGuess !== computerGuess[0]) && (guessesLeft > 0)) {
-	guessesLeft = guessesLeft-1;
-}
-// the player gets a loss if they do not guess correctly & do not have any guesses left. this resets the game.
-else {
-	losses++;
-	guessesLeft = 9;
-	lettersGuessed.length = 0;
-	computerGuess.length = 0;
-	var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-	computerGuess.push(compGuess);
-	console.log(computerGuess[0]);
-}
 
-// sets HTML on page
-var html = "<p>Guess what letter I'm thinking of!</p>" +
-          "<p>Wins: " + wins + "</p>" +
-          "<p>Losses: " + losses + "</p>" +
-          "<p>Guesses left: " + guessesLeft + "</p>" +
-          "<p>Your guesses so far: " + lettersGuessed + "</p>";
  
-document.querySelector("#game").innerHTML = html;
+     // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+     var html =
+     "<p>wins: " + wins + "</p>" +
+     "<p>losses: " + loss + "</p>" +
+     "<p>guesses left: " + guessesLeft + "</p>" +
+     "<p>letters guessed: " + lettersGuessed + "</p>" ;
+ 
 
+   // Set the inner HTML contents of the #game div to our html string
+   document.querySelector("#game").innerHTML = html;
+ }
 }
