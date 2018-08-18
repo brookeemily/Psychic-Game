@@ -18,6 +18,17 @@ window.onload = function() {
       var computerLetter = computerChoice[Math.floor(Math.random()*computerChoice.length)];
       computerChose.push(computerLetter);
       console.log(computerChose[0]);
+
+           // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+     var html =
+     "<p>wins: " + wins + "</p>" +
+     "<p>losses: " + loss + "</p>" +
+     "<p>guesses left: " + guessesLeft + "</p>" +
+     "<p>letters guessed: " + lettersGuessed + "</p>" ;
+ 
+
+   // Set the inner HTML contents of the #game div to our html string
+   document.querySelector("#game").innerHTML = html;
 }
   
 // User input
@@ -53,6 +64,7 @@ if((userGuess !== computerChose[0]) && (guessesLeft > 0)) {
     // lettersGuessed.push(item1, item2, item3, item4, item5, item6, item7, item8, item9);
     guessesLeft--;
     console.log("sry");
+    console.log(computerChose[0]);
     }
 
     if((userGuess !== computerChose[0]) && (guessesLeft <= 0)) {
@@ -62,24 +74,24 @@ if((userGuess !== computerChose[0]) && (guessesLeft > 0)) {
         lettersGuessed = [];
         console.log("You took the L");
         computerChose = [];
-        var computerLetter = computerChoice[Math.floor(Math.random()*computerChoice.length)];        
-        computerChose.push(computerLetter);
         console.log(computerChose[0]);
+
 
         }
 
     
 
- 
-     // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
-     var html =
-     "<p>wins: " + wins + "</p>" +
-     "<p>losses: " + loss + "</p>" +
-     "<p>guesses left: " + guessesLeft + "</p>" +
-     "<p>letters guessed: " + lettersGuessed + "</p>" ;
+           // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+           var html =
+           "<p>wins: " + wins + "</p>" +
+           "<p>losses: " + loss + "</p>" +
+           "<p>guesses left: " + guessesLeft + "</p>" +
+           "<p>letters guessed: " + lettersGuessed + "</p>" ;
+       
+      
+         // Set the inner HTML contents of the #game div to our html string
+         document.querySelector("#game").innerHTML = html;
  
 
-   // Set the inner HTML contents of the #game div to our html string
-   document.querySelector("#game").innerHTML = html;
  }
 }
