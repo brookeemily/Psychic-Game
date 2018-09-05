@@ -63,8 +63,8 @@ if((userGuess === computerChose[0]) && (guessesLeft > 0)) {
 if((userGuess !== computerChose[0]) && (guessesLeft > 0)) {
     // lettersGuessed.push(item1, item2, item3, item4, item5, item6, item7, item8, item9);
     guessesLeft--;
-    console.log("sry");
-    console.log(computerChose[0]);
+    console.log("keep guessing");
+    // console.log(computerChose[0]);
     }
 
     if((userGuess !== computerChose[0]) && (guessesLeft <= 0)) {
